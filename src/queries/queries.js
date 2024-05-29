@@ -57,3 +57,33 @@ export const PopularQuery =
             }
         }
     }`
+
+export const UpcomingQuery =
+    (page, perPage, season) => `query {
+        Page(page: ${page}, perPage: ${perPage}) {
+            pageInfo {
+                currentPage
+                hasNextPage
+            }
+            media(type: ANIME, sort: POPULARITY_DESC, season: ${season}, seasonYear: ${new Date().getFullYear()}) {
+                id
+                title {
+                    romaji
+                }
+                coverImage {
+                    extraLarge
+                }
+                format
+                seasonYear
+                averageScore
+                episodes
+                description(asHtml: true)
+                studios(isMain: true) {
+                    nodes {
+                      name
+                    }
+                }
+                genres
+            }
+        }
+    }`
