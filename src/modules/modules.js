@@ -1,6 +1,12 @@
 import axios from "axios";
 import { config } from "dotenv"; config();
-import { TrendingQuery, PopularQuery, UpcomingQuery, FavoriteQuery } from "../queries/queries.js";
+import {
+    TrendingQuery,
+    PopularQuery,
+    UpcomingQuery,
+    FavoriteQuery,
+    InfoQuery
+} from "../queries/queries.js";
 import { getNextSeason } from "../utils/timing.js";
 
 const getData = axios.create({
@@ -117,4 +123,23 @@ export const getFavorite = async (page, perPage) => {
         });
     });
     return { pagination, data }
+}
+
+export const getInfo = async (id) => {
+    const query = InfoQuery(id);
+    const response = (await getData.post("", { query })).data
+    return {
+        id: response.data.Media.id,
+        title: response.data.Media.title.romaji,
+        cover: response.data.Media.coverImage.extraLarge,
+        type: response.data.Media.format === "TV" ? "TV Show" : response.data.Media.format === "TV_SHORT" ? "TV Short"
+            : response.data.Media.format === "MOVIE" ? "Movie" : response.data.Media.format === "SPECIAL" ? "Special"
+                : response.data.Media.format === "MUSIC" ? "Music" : response.data.Media.format,
+        year: response.data.Media.seasonYear,
+        score: response.data.Media.averageScore ? `${response.data.Media.averageScore}%` : null,
+        episodes: response.data.Media.episodes,
+        description: response.data.Media.description,
+        studio: response.data.Media.studios.nodes.length > 0 ? response.data.Media.studios.nodes[0].name : null,
+        genres: response.data.Media.genres
+    }
 }

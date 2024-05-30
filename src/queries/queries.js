@@ -117,3 +117,27 @@ export const FavoriteQuery =
             }
         }
     }`
+
+export const InfoQuery =
+    (id) => `query {
+        Media(id: ${id}, type: ANIME, sort: FAVOURITES_DESC) {
+            id
+            title {
+                romaji
+            }
+            coverImage {
+                extraLarge
+            }
+            format
+            seasonYear
+            averageScore
+            episodes
+            description(asHtml: true)
+            studios(isMain: true) {
+                nodes {
+                  name
+                }
+            }
+            genres
+        }
+    }`
