@@ -128,6 +128,30 @@ export const getFavorite = async (page, perPage) => {
 export const getInfo = async (id) => {
     const query = InfoQuery(id);
     const response = (await getData.post("", { query })).data
+    const recommendations = [];
+    if (response.data.Media.recommendations.nodes.length > 0) {
+        response.data.Media.recommendations.nodes.map((i, index) => {
+            recommendations.push({
+                id: i.mediaRecommendation.id,
+                title: i.mediaRecommendation.title.romaji,
+                cover: i.mediaRecommendation.coverImage.extraLarge,
+                type: i.mediaRecommendation.format === "TV" ? "TV Show"
+                    : i.mediaRecommendation.format === "TV_SHORT" ? "TV Short"
+                        : i.mediaRecommendation.format === "MOVIE" ? "Movie"
+                            : i.mediaRecommendation.format === "SPECIAL" ? "Special"
+                                : i.mediaRecommendation.format === "MUSIC" ? "Music"
+                                    : i.mediaRecommendation.format,
+                year: i.mediaRecommendation.seasonYear,
+                score: i.mediaRecommendation.averageScore ? `${i.mediaRecommendation.averageScore}%` : null,
+                episodes: i.mediaRecommendation.episodes,
+                description: i.mediaRecommendation.description,
+                studio: i.mediaRecommendation.studios.nodes.length > 0
+                    ? i.mediaRecommendation.studios.nodes[0].name
+                    : null,
+                genres: i.mediaRecommendation.genres
+            });
+        });
+    }
     return {
         id: response.data.Media.id,
         title: response.data.Media.title.romaji,
@@ -140,6 +164,7 @@ export const getInfo = async (id) => {
         episodes: response.data.Media.episodes,
         description: response.data.Media.description,
         studio: response.data.Media.studios.nodes.length > 0 ? response.data.Media.studios.nodes[0].name : null,
-        genres: response.data.Media.genres
+        genres: response.data.Media.genres,
+        recommendations
     }
 }

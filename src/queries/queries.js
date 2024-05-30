@@ -139,5 +139,29 @@ export const InfoQuery =
                 }
             }
             genres
+            recommendations(page: 1, perPage: 5) {
+                nodes {
+                    mediaRecommendation {
+                        id
+                        title {
+                            romaji
+                        }
+                        coverImage {
+                            extraLarge
+                        }
+                        format
+                        seasonYear
+                        averageScore
+                        episodes
+                        description(asHtml: true)
+                        studios(isMain: true) {
+                            nodes {
+                                name
+                            }
+                        }
+                        genres
+                    }
+                }
+            }
         }
     }`
