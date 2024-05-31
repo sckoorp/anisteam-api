@@ -7,7 +7,8 @@ import {
     getUpcoming,
     getFavorite,
     getMovies,
-    getInfo
+    getInfo,
+    getStream
 } from "../modules/modules.js";
 
 router.get("/trending", async (request, response) => {
@@ -114,6 +115,32 @@ router.get("/info", async (request, response) => {
                 code: response.statusCode,
                 type: "Bad Request",
                 message: "(id) query param is missing!"
+            });
+        }
+    } catch (error) {
+        return response.status(500).json({
+            code: response.statusCode,
+            type: "Internal Server Error",
+            message: error.message
+        });
+    }
+});
+
+router.get("/stream", async (request, response) => {
+    try {
+        const id = request.query.id
+        const episode = request.query.episode
+        if (id || episode) {
+            return response.status(200).json({
+                code: response.statusCode,
+                type: "OK",
+                data: await getStream(id, episode)
+            });
+        } else {
+            return response.status(400).json({
+                code: response.statusCode,
+                type: "Bad Request",
+                message: "(id) or (episode) query param is missing!"
             });
         }
     } catch (error) {

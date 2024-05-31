@@ -9,7 +9,8 @@ import {
     InfoQuery
 } from "../queries/queries.js";
 import { getNextSeason } from "../utils/timing.js";
-import { getEpisodes } from "../utils/provider.js";
+import { getEpisodes, getSources } from "../utils/provider.js";
+import { base64encode } from "../utils/encoder.js";
 
 const getData = axios.create({
     baseURL: process.env.ANILIST_API_URL,
@@ -196,5 +197,16 @@ export const getInfo = async (id) => {
         genres: response.data.Media.genres,
         recommendations,
         episodesList: await getEpisodes(id)
+    }
+}
+
+export const getStream = async (id, episode) => {
+    const sources = await getSources(episode);
+    const source = sources.sources.default || sources.sources.backup
+    return {
+        sources: sources.sources,
+        iframe: `https://plyr.link/p/player.html#${base64encode(source ? source : sources.sources.backup)}`,
+        download: sources.download,
+        info: await getInfo(id)
     }
 }

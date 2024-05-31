@@ -15,3 +15,12 @@ export const getEpisodes = async (id) => {
     }
     return episodes
 }
+
+export const getSources = async (id) => {
+    const data = await anilist.fetchEpisodeSources(id);
+    const sources = {
+        default: data.sources.find(source => source.quality === "default").url,
+        backup: data.sources.find(source => source.quality === "backup").url
+    }
+    return { sources, download: data.download }
+}
