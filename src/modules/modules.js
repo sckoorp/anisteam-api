@@ -195,6 +195,6 @@ export const getInfo = async (id) => {
         studio: response.data.Media.studios.nodes.length > 0 ? response.data.Media.studios.nodes[0].name : null,
         genres: response.data.Media.genres,
         recommendations,
-        episodes_list: await getEpisodes(id)
+        episodesList: await getEpisodes(id)
     }
 }
