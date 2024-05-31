@@ -9,6 +9,7 @@ import {
     InfoQuery
 } from "../queries/queries.js";
 import { getNextSeason } from "../utils/timing.js";
+import { getEpisodes } from "../utils/provider.js";
 
 const getData = axios.create({
     baseURL: process.env.ANILIST_API_URL,
@@ -193,6 +194,7 @@ export const getInfo = async (id) => {
         description: response.data.Media.description,
         studio: response.data.Media.studios.nodes.length > 0 ? response.data.Media.studios.nodes[0].name : null,
         genres: response.data.Media.genres,
-        recommendations
+        recommendations,
+        episodes_list: await getEpisodes(id)
     }
 }
