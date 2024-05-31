@@ -118,6 +118,36 @@ export const FavoriteQuery =
         }
     }`
 
+export const MoviesQuery =
+    (page, perPage) => `query {
+        Page(page: ${page}, perPage: ${perPage}) {
+            pageInfo {
+                currentPage
+                hasNextPage
+            }
+            media(type: ANIME, sort: POPULARITY_DESC, format: MOVIE) {
+                id
+                title {
+                    romaji
+                }
+                coverImage {
+                    extraLarge
+                }
+                format
+                seasonYear
+                averageScore
+                episodes
+                description(asHtml: true)
+                studios(isMain: true) {
+                    nodes {
+                      name
+                    }
+                }
+                genres
+            }
+        }
+    }`
+
 export const InfoQuery =
     (id) => `query {
         Media(id: ${id}, type: ANIME, sort: FAVOURITES_DESC) {

@@ -6,6 +6,7 @@ import {
     getPopular,
     getUpcoming,
     getFavorite,
+    getMovies,
     getInfo
 } from "../modules/modules.js";
 
@@ -71,6 +72,24 @@ router.get("/favorite", async (request, response) => {
             code: response.statusCode,
             type: "OK",
             data: await getFavorite(page, per)
+        });
+    } catch (error) {
+        return response.status(500).json({
+            code: response.statusCode,
+            type: "Internal Server Error",
+            message: error.message
+        });
+    }
+});
+
+router.get("/movies", async (request, response) => {
+    try {
+        const page = request.query.page || 1
+        const per = request.query.per || 50
+        return response.status(200).json({
+            code: response.statusCode,
+            type: "OK",
+            data: await getMovies(page, per)
         });
     } catch (error) {
         return response.status(500).json({
