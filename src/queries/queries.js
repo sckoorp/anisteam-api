@@ -1,6 +1,6 @@
 export const TrendingQuery =
-    (page, perPage) => `query {
-        Page(page: ${page}, perPage: ${perPage}) {
+    (page, per) => `query {
+        Page(page: ${page}, perPage: ${per}) {
             pageInfo {
                 currentPage
                 hasNextPage
@@ -29,8 +29,8 @@ export const TrendingQuery =
     }`
 
 export const PopularQuery =
-    (page, perPage) => `query {
-        Page(page: ${page}, perPage: ${perPage}) {
+    (page, per) => `query {
+        Page(page: ${page}, perPage: ${per}) {
             pageInfo {
                 currentPage
                 hasNextPage
@@ -59,8 +59,8 @@ export const PopularQuery =
     }`
 
 export const UpcomingQuery =
-    (page, perPage, season) => `query {
-        Page(page: ${page}, perPage: ${perPage}) {
+    (page, per, season) => `query {
+        Page(page: ${page}, perPage: ${per}) {
             pageInfo {
                 currentPage
                 hasNextPage
@@ -89,8 +89,8 @@ export const UpcomingQuery =
     }`
 
 export const FavoriteQuery =
-    (page, perPage) => `query {
-        Page(page: ${page}, perPage: ${perPage}) {
+    (page, per) => `query {
+        Page(page: ${page}, perPage: ${per}) {
             pageInfo {
                 currentPage
                 hasNextPage
@@ -119,8 +119,8 @@ export const FavoriteQuery =
     }`
 
 export const MoviesQuery =
-    (page, perPage) => `query {
-        Page(page: ${page}, perPage: ${perPage}) {
+    (page, per) => `query {
+        Page(page: ${page}, perPage: ${per}) {
             pageInfo {
                 currentPage
                 hasNextPage
@@ -192,6 +192,36 @@ export const InfoQuery =
                         genres
                     }
                 }
+            }
+        }
+    }`
+
+export const SearchQuery =
+    (page, per, q) => `query {
+        Page(page: ${page}, perPage: ${per}) {
+            pageInfo {
+                currentPage
+                hasNextPage
+            }
+            media(type: ANIME, search: "${q}") {
+                id
+                title {
+                    romaji
+                }
+                coverImage {
+                    extraLarge
+                }
+                format
+                seasonYear
+                averageScore
+                episodes
+                description(asHtml: true)
+                studios(isMain: true) {
+                    nodes {
+                      name
+                    }
+                }
+                genres
             }
         }
     }`

@@ -6,7 +6,8 @@ import {
     UpcomingQuery,
     FavoriteQuery,
     MoviesQuery,
-    InfoQuery
+    InfoQuery,
+    SearchQuery
 } from "../queries/queries.js";
 import { formatType } from "../utils/formater.js";
 import { getNextSeason } from "../utils/timing.js";
@@ -21,8 +22,8 @@ const getData = axios.create({
     }
 });
 
-export const getTrending = async (page, perPage) => {
-    const query = TrendingQuery(page, perPage);
+export const getTrending = async (page, per) => {
+    const query = TrendingQuery(page, per);
     const response = (await getData.post("", { query })).data
     const pagination = {
         currentPage: response.data.Page.pageInfo.currentPage,
@@ -44,8 +45,8 @@ export const getTrending = async (page, perPage) => {
     return { pagination, data }
 }
 
-export const getPopular = async (page, perPage) => {
-    const query = PopularQuery(page, perPage);
+export const getPopular = async (page, per) => {
+    const query = PopularQuery(page, per);
     const response = (await getData.post("", { query })).data
     const pagination = {
         currentPage: response.data.Page.pageInfo.currentPage,
@@ -67,8 +68,8 @@ export const getPopular = async (page, perPage) => {
     return { pagination, data }
 }
 
-export const getUpcoming = async (page, perPage) => {
-    const query = UpcomingQuery(page, perPage, getNextSeason());
+export const getUpcoming = async (page, per) => {
+    const query = UpcomingQuery(page, per, getNextSeason());
     const response = (await getData.post("", { query })).data
     const pagination = {
         currentPage: response.data.Page.pageInfo.currentPage,
@@ -90,8 +91,8 @@ export const getUpcoming = async (page, perPage) => {
     return { pagination, data }
 }
 
-export const getFavorite = async (page, perPage) => {
-    const query = FavoriteQuery(page, perPage);
+export const getFavorite = async (page, per) => {
+    const query = FavoriteQuery(page, per);
     const response = (await getData.post("", { query })).data
     const pagination = {
         currentPage: response.data.Page.pageInfo.currentPage,
@@ -113,8 +114,8 @@ export const getFavorite = async (page, perPage) => {
     return { pagination, data }
 }
 
-export const getMovies = async (page, perPage) => {
-    const query = MoviesQuery(page, perPage);
+export const getMovies = async (page, per) => {
+    const query = MoviesQuery(page, per);
     const response = (await getData.post("", { query })).data
     const pagination = {
         currentPage: response.data.Page.pageInfo.currentPage,
@@ -172,6 +173,29 @@ export const getInfo = async (id) => {
         recommendations,
         episodesList: await getEpisodes(id)
     }
+}
+
+export const getSearch = async (page, per, q) => {
+    const query = SearchQuery(page, per, q);
+    const response = (await getData.post("", { query })).data
+    const pagination = {
+        currentPage: response.data.Page.pageInfo.currentPage,
+        hasNextPage: response.data.Page.pageInfo.hasNextPage
+    }
+    const data = response.data.Page.media.map(media => ({
+        id: media.id,
+        title: media.title.romaji,
+        cover: media.coverImage.extraLarge,
+        type: formatType(media.format),
+        year: media.seasonYear,
+        score: media.averageScore ? `${media.averageScore}%` : null,
+        episodes: media.episodes,
+        description: media.description,
+        studio: media.studios.nodes.length > 0 ? media.studios.nodes[0].name : null,
+        genres: media.genres
+    }));
+
+    return { pagination, data }
 }
 
 export const getStream = async (id, episode) => {

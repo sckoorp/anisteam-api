@@ -8,6 +8,7 @@ import {
     getFavorite,
     getMovies,
     getInfo,
+    getSearch,
     getStream
 } from "../modules/modules.js";
 
@@ -115,6 +116,33 @@ router.get("/info", async (request, response) => {
                 code: response.statusCode,
                 type: "Bad Request",
                 message: "(id) query param is missing!"
+            });
+        }
+    } catch (error) {
+        return response.status(500).json({
+            code: response.statusCode,
+            type: "Internal Server Error",
+            message: error.message
+        });
+    }
+});
+
+router.get("/search", async (request, response) => {
+    try {
+        const page = request.query.page || 1
+        const per = request.query.per || 50
+        const q = request.query.q
+        if (q) {
+            return response.status(200).json({
+                code: response.statusCode,
+                type: "OK",
+                data: await getSearch(page, per, q)
+            });
+        } else {
+            return response.status(400).json({
+                code: response.statusCode,
+                type: "Bad Request",
+                message: "(q) query param is missing!"
             });
         }
     } catch (error) {
