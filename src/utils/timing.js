@@ -1,46 +1,22 @@
 export const getSeason = () => {
-    const month = new Date().getMonth();
+    const month = new Date().getMonth() + 1
     switch (month) {
-        case 11: // December
-        case 0:  // January
-        case 1:  // February
+        case 12:
+        case 1:
+        case 2:
             return "WINTER";
-        case 2:  // March
-        case 3:  // April
-        case 4:  // May
+        case 3:
+        case 4:
+        case 5:
             return "SPRING";
-        case 5:  // June
-        case 6:  // July
-        case 7:  // August
+        case 6:
+        case 7:
+        case 8:
             return "SUMMER";
-        case 8:  // September
-        case 9:  // October
-        case 10: // November
+        case 9:
+        case 10:
+        case 11:
             return "FALL";
-        default:
-            return null
-    }
-}
-
-export const getNextSeason = () => {
-    const month = new Date().getMonth();
-    switch (month) {
-        case 11: // December
-        case 0:  // January
-        case 1:  // February
-            return "SPRING";
-        case 2:  // March
-        case 3:  // April
-        case 4:  // May
-            return "SUMMER";
-        case 5:  // June
-        case 6:  // July
-        case 7:  // August
-            return "FALL";
-        case 8:  // September
-        case 9:  // October
-        case 10: // November
-            return "WINTER";
         default:
             return null
     }

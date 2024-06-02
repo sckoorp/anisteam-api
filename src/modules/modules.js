@@ -10,7 +10,7 @@ import {
     SearchQuery
 } from "../queries/queries.js";
 import { formatType } from "../utils/formater.js";
-import { getNextSeason } from "../utils/timing.js";
+import { getSeason } from "../utils/timing.js";
 import { getEpisodes, getSources } from "../utils/provider.js";
 import { base64encode } from "../utils/encoder.js";
 
@@ -69,7 +69,7 @@ export const getPopular = async (page, per) => {
 }
 
 export const getUpcoming = async (page, per) => {
-    const query = UpcomingQuery(page, per, getNextSeason());
+    const query = UpcomingQuery(page, per, getSeason());
     const response = (await getData.post("", { query })).data
     const pagination = {
         currentPage: response.data.Page.pageInfo.currentPage,
