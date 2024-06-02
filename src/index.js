@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import apicache from "apicache-plus";
 import router from "./router/routes.js";
 import { config } from "dotenv";
 config();
@@ -9,6 +10,7 @@ const port = process.env.SERVER_PORT || 3000
 
 server.use(cors());
 server.use(express.json());
+server.use(apicache("30 minutes"));
 server.use("/api", router);
 
 server.get("/", (request, response) => {
