@@ -7,10 +7,11 @@ config();
 
 const server = express();
 const port = process.env.SERVER_PORT || 3000
+const age = process.env.API_CACHE_AGE || "30 minutes"
 
 server.use(cors());
 server.use(express.json());
-server.use(apicache("30 minutes"));
+server.use(apicache(age));
 server.use("/api", router);
 
 server.get("/", (request, response) => {
