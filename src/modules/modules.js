@@ -1,6 +1,7 @@
 import axios from "axios";
 import { config } from "dotenv"; config();
 import {
+    SpotlightQuery,
     TrendingQuery,
     PopularQuery,
     UpcomingQuery,
@@ -21,6 +22,25 @@ const getData = axios.create({
         "Accept": "application/json"
     }
 });
+
+export const getSpotlights = async () => {
+    const query = SpotlightQuery();
+    const response = (await getData.post("", { query })).data
+    const data = response.data.Page.media.map((media, index) => ({
+        id: media.id,
+        rank: index + 1,
+        title: media.title.romaji,
+        cover: media.coverImage.extraLarge,
+        banner: media.bannerImage,
+        type: formatType(media.format),
+        year: media.seasonYear,
+        score: media.averageScore ? `${media.averageScore}%` : null,
+        episodes: media.episodes,
+        description: media.description
+    }));
+
+    return data
+}
 
 export const getTrending = async (page, per) => {
     const query = TrendingQuery(page, per);
