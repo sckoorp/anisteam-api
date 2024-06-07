@@ -19,7 +19,7 @@ npm run dev
 - Server is listening on http://localhost:3000 (by default port is 3000)
 
 ## Documentation
-`Under construction...`
+You can read the api documentation on the wiki [here](https://github.com/sckoorp/anistream-api/wiki/Documentation)
 
 ## Credit
 - Anilist - as main anime data provider.
