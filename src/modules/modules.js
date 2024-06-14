@@ -9,7 +9,7 @@ import {
     InfoQuery,
     SearchQuery
 } from "../queries/queries.js";
-import { formatType } from "../utils/formater.js";
+import { formatType, formatStatus } from "../utils/formater.js";
 import { getSeason } from "../utils/timing.js";
 import { getEpisodes, getSources } from "../utils/provider.js";
 import { base64encode } from "../utils/encoder.js";
@@ -164,6 +164,7 @@ export const getInfo = async (id) => {
         title: response.data.Media.title.romaji,
         cover: response.data.Media.coverImage.extraLarge,
         type: formatType(response.data.Media.format),
+        status: formatStatus(response.data.Media.status),
         year: response.data.Media.seasonYear,
         score: response.data.Media.averageScore ? `${response.data.Media.averageScore}%` : null,
         episodes: response.data.Media.episodes,

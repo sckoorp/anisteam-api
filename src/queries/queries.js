@@ -159,6 +159,7 @@ export const InfoQuery =
                 extraLarge
             }
             format
+            status
             seasonYear
             averageScore
             episodes

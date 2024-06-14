@@ -14,3 +14,18 @@ export const formatType = (format) => {
             return format
     }
 }
+
+export const formatStatus = (status) => {
+    switch (status) {
+        case "FINISHED":
+            return "Finished";
+        case "RELEASING":
+            return "Releasing";
+        case "NOT_YET_RELEASED":
+            return "Not Yet Released";
+        case "CANCELLED":
+            return "Cancelled";
+        default:
+            return status
+    }
+}
