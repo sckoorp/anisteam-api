@@ -2,7 +2,6 @@ import express from "express";
 const router = express.Router();
 
 import {
-    getSpotlights,
     getTrending,
     getPopular,
     getUpcoming,
@@ -12,22 +11,6 @@ import {
     getSearch,
     getStream
 } from "../modules/modules.js";
-
-router.get("/spotlights", async (request, response) => {
-    try {
-        return response.status(200).json({
-            code: response.statusCode,
-            type: "OK",
-            data: await getSpotlights()
-        });
-    } catch (error) {
-        return response.status(500).json({
-            code: response.statusCode,
-            type: "Internal Server Error",
-            message: error.message
-        });
-    }
-});
 
 router.get("/trending", async (request, response) => {
     try {

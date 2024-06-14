@@ -1,24 +1,3 @@
-export const SpotlightQuery =
-    () => `query {
-        Page(page: 1, perPage: 12) {
-            media(type: ANIME, sort: [TRENDING_DESC, POPULARITY_DESC]) {
-                id
-                title {
-                    romaji
-                }
-                coverImage {
-                    extraLarge
-                }
-                bannerImage
-                format
-                seasonYear
-                averageScore
-                episodes
-                description(asHtml: true)
-            }
-        }
-    }`
-
 export const TrendingQuery =
     (page, per) => `query {
         Page(page: ${page}, perPage: ${per}) {
