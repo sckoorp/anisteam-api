@@ -1,22 +1,14 @@
-# Anistream API
-`Anistream API` is an anime streaming provider restful api, powered by [Anilist](https://anilist.co) & [@consumet/extensions](https://github.com/consumet/consumet.ts)
+# Hiruki API
+`Hiruki API` is an anime streaming provider restful api, powered by [Anilist](https://anilist.co) & [@consumet/extensions](https://github.com/consumet/consumet.ts)
 
 ## Installation
 ### Install Locally
-- Clone repo
 ```sh
-git clone https://github.com/sckoorp/anistream-api.git
-```
-- Install dependencies
-```sh
+git clone https://github.com/sckoorp/hiruki-api.git
 npm install
+npm start
 ```
-- Fill `.env` keys with values
-- Start dev server
-```sh
-npm run dev
-```
-- Server is listening on http://localhost:3000 (by default port is 3000)
+#### (!) don't forget to fill `.env` file before starting the server
 
 ## Documentation
 You can read the api documentation on the wiki [here](https://github.com/sckoorp/anistream-api/wiki/Documentation)

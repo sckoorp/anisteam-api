@@ -1,5 +1,5 @@
 {
-    "name": "anistream-api",
+    "name": "hiruki-api",
     "private": true,
     "main": "src/index.js",
     "type": "module",
