@@ -1,4 +1,6 @@
 # Hiruki API
+<img src="https://files.catbox.moe/4ms3rn.webp" align="right" height="300vh">
+
 `Hiruki API` is an anime streaming provider restful api, powered by [Anilist](https://anilist.co) & [@consumet/extensions](https://github.com/consumet/consumet.ts)
 
 ## Installation
