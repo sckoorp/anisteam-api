@@ -11,7 +11,7 @@ npm start
 #### (!) don't forget to fill `.env` file before starting the server
 
 ## Documentation
-You can read the api documentation on the wiki [here](https://github.com/sckoorp/anistream-api/wiki/Documentation)
+You can read the api documentation on the wiki [here](https://github.com/sckoorp/hiruki-api/wiki/Documentation)
 
 ## Credit
 - Anilist - as main anime data provider.
