@@ -18,8 +18,8 @@ server.get("/", (request, response) => {
     return response.status(200).json({
         code: response.statusCode,
         type: "OK",
-        message: "Anistream API 🎉",
-        docs: "Soon..."
+        message: "Hiruki API 🎉",
+        docs: "https://github.com/sckoorp/hiruki-api/wiki"
     });
 });
 

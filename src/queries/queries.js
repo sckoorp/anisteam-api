@@ -14,6 +14,7 @@ export const TrendingQuery =
                     extraLarge
                 }
                 format
+                status
                 seasonYear
                 averageScore
                 episodes
@@ -44,6 +45,7 @@ export const PopularQuery =
                     extraLarge
                 }
                 format
+                status
                 seasonYear
                 averageScore
                 episodes
@@ -74,6 +76,7 @@ export const UpcomingQuery =
                     extraLarge
                 }
                 format
+                status
                 seasonYear
                 averageScore
                 episodes
@@ -104,6 +107,7 @@ export const FavoriteQuery =
                     extraLarge
                 }
                 format
+                status
                 seasonYear
                 averageScore
                 episodes
@@ -134,6 +138,7 @@ export const MoviesQuery =
                     extraLarge
                 }
                 format
+                status
                 seasonYear
                 averageScore
                 episodes
@@ -213,6 +218,7 @@ export const SearchQuery =
                     extraLarge
                 }
                 format
+                status
                 seasonYear
                 averageScore
                 episodes
