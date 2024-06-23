@@ -19,7 +19,7 @@ server.get("/", (request, response) => {
         code: response.statusCode,
         type: "OK",
         message: "Hiruki API 🎉",
-        docs: "https://github.com/sckoorp/hiruki-api/wiki"
+        docs: "https://docs.hiruki.xyz"
     });
 });
 
